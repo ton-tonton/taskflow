@@ -76,11 +76,11 @@ Compodoc auto-generates component documentation:
 ## Component Development Workflow
 
 1. **Generate component**: `ng generate component <name>`
-3. **Create story**: Add `.stories.ts` file in same directory or `src/stories/`
-4. **Use signals**: For reactive state instead of traditional properties
-5. **Tailwind styling**: Import component CSS and use Tailwind utilities
-6. **Test in Storybook**: Run `npm run storybook` to view component
-7. **Write tests**: Create `.spec.ts` file with Vitest
+2. **Create story**: Add `.stories.ts` file in same directory or `src/stories/`
+3. **Use signals**: For reactive state instead of traditional properties
+4. **Tailwind styling**: Import component CSS and use Tailwind utilities
+5. **Test in Storybook**: Run `npm run storybook` to view component
+6. **Write tests**: Create `.spec.ts` file with Vitest
 
 ## Figma to Component Workflow
 

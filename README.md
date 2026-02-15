@@ -1,6 +1,8 @@
 # Taskflow
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+## Project Overview
+
+Experimental project for learning Angular 21, Tailwind CSS v4, and Storybook integration following best practices. Focus on creating components from Figma designs using MCP servers.
 
 ## Development server
 

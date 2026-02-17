@@ -102,6 +102,7 @@ When creating components from Figma designs:
 ## Angular Best Practices
 
 - Always use standalone components over NgModules
+- Convention: Use separate files (`.html`, `.css`, `.ts`) for standard components. Inline templates and styles are reserved for small, simple components (e.g. < 15 lines).
 - Must NOT set `standalone: true` inside Angular decorators. It's the default in Angular v20+.
 - Use signals for state management
 - Implement lazy loading for feature routes

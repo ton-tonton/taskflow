@@ -80,7 +80,6 @@ Compodoc auto-generates component documentation:
 3. **Use signals**: For reactive state instead of traditional properties
 4. **Tailwind styling**: Import component CSS and use Tailwind utilities
 5. **Test in Storybook**: Run `npm run storybook` to view component
-6. **Write tests**: Create `.spec.ts` file with Vitest
 
 ## Figma to Component Workflow
 
@@ -147,3 +146,26 @@ When creating components from Figma designs:
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Icons
+
+Use `@fortawesome/angular-fontawesome` directly — do **not** create a custom icon wrapper component.
+
+- Import `FaIconComponent` from `@fortawesome/angular-fontawesome` in the component's `imports` array.
+- Import icon definitions from the appropriate pack (e.g., `faPlus` from `@fortawesome/free-solid-svg-icons`).
+- Bind via `[icon]="faPlus"` on `<fa-icon>`.
+- For decorative icons add `aria-hidden="true"`. For interactive icons wrap in `<button aria-label="...">`.
+
+Example:
+```typescript
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+@Component({
+  imports: [FaIconComponent],
+  template: `<fa-icon [icon]="faPlus" aria-hidden="true" />`
+})
+export class MyComponent {
+  faPlus = faPlus;
+}
+```

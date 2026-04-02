@@ -140,6 +140,7 @@ When creating components from Figma designs:
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
 - When using external templates/styles, use paths relative to the component TS file.
+- Name event handlers for what they do, not for the triggering event (e.g., `toggleTask` instead of `onToggle`).
 
 ## State Management
 

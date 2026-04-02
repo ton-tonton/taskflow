@@ -2,6 +2,66 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "Task",
+            "id": "interface-Task-70562fe305187aa4894f746fdeea0dee5caadbd22e83254ed6c28481a1a9ed56daeb3e4d8f22b623407ce8f6afa32c5094e9ba64257a7d1b0d55a4dd1c4091bb",
+            "file": "src/app/models/task.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface Task {\n  id: number;\n  text: string;\n  completed: boolean;\n  createdAt: Date;\n  dueDate?: string;\n}\n",
+            "properties": [
+                {
+                    "name": "completed",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "createdAt",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "dueDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -224,7 +284,7 @@
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-8e98c01444c028764efc3d1ec8d35160b83e95235160bc6ddf97a1a0d08718c6aa205c4db9a5120204fad05d450c5463878ad2f61c1368b425abd7a2ff62890b",
+            "id": "component-CheckboxComponent-e4a6c08b750a04b191a497adfc08d75a528563b53a9e98c20eda120628f82a0dfb354b12620e081db31c1da6c0ba8eec80226d96b738dda998e04ebf9b4200cb",
             "file": "src/app/components/checkbox/checkbox.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -300,7 +360,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faSquare } from '@fortawesome/free-regular-svg-icons';\nimport { faSquareCheck } from '@fortawesome/free-solid-svg-icons';\n\n@Component({\n  selector: 'app-checkbox',\n  imports: [FaIconComponent],\n  templateUrl: './checkbox.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CheckboxComponent {\n  checked = input<boolean>(false);\n  disabled = input<boolean>(false);\n  ariaLabel = input<string | undefined>(undefined);\n\n  /**\n   * Event emitted when the checkbox state changes.\n   */\n  checkedChange = output<boolean>();\n\n  /**\n   * Unchecked state icon.\n   * @ignore\n   */\n  readonly faSquare = faSquare;\n\n  /**\n   * Checked state icon.\n   * @ignore\n   */\n  readonly faSquareCheck = faSquareCheck;\n\n  /**\n   * Handles the native change event and emits the new state.\n   * @ignore\n   * @param event The change event triggered by the native checkbox\n   */\n  onCheckChange(event: Event): void {\n    const target = event.target as HTMLInputElement;\n    this.checkedChange.emit(target.checked);\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faSquare } from '@fortawesome/free-regular-svg-icons';\nimport { faSquareCheck } from '@fortawesome/free-solid-svg-icons';\n\n@Component({\n  selector: 'app-checkbox',\n  imports: [FaIconComponent],\n  templateUrl: './checkbox.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CheckboxComponent {\n  checked = input<boolean>(false);\n  disabled = input<boolean>(false);\n  ariaLabel = input<string | undefined>(undefined);\n\n  /**\n   * Event emitted when the checkbox state changes.\n   */\n  checkedChange = output<boolean>();\n\n  /**\n   * @ignore\n   * Unchecked state icon.\n   */\n  readonly faSquare = faSquare;\n\n  /**\n   * @ignore\n   * Checked state icon.\n   */\n  readonly faSquareCheck = faSquareCheck;\n\n  /**\n   * @ignore\n   * Handles the native change event and emits the new state.\n   * @param event Event\n   */\n  onCheckChange(event: Event): void {\n    const target = event.target as HTMLInputElement;\n    this.checkedChange.emit(target.checked);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -485,6 +545,137 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "TaskItem",
+            "id": "component-TaskItem-a374a51dea9084bf3bfa3bdf644c62fbbb2e4072b4dbc5ecb62322a14df884b2e63fc8a1b50f6c8b82845a33f4c5f256f66347bfd3b81b0f4d9541851c09a9ce",
+            "file": "src/app/components/task-item/task-item.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "host": {},
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-task-item",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./task-item.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "faTrash",
+                    "defaultValue": "faTrash",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "task",
+                    "defaultValue": "input.required<Task>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "taskDelete",
+                    "defaultValue": "output<Task>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "taskToggle",
+                    "defaultValue": "output<Task>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "deleteTask",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleTask",
+                    "args": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "checked",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "FaIconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "CheckboxComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faTrash } from '@fortawesome/free-solid-svg-icons';\nimport { CheckboxComponent } from '../checkbox/checkbox.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-task-item',\n  imports: [FaIconComponent, CheckboxComponent],\n  templateUrl: './task-item.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    class: 'block w-full',\n  },\n})\nexport class TaskItem {\n  task = input.required<Task>();\n\n  taskToggle = output<Task>();\n  taskDelete = output<Task>();\n\n  readonly faTrash = faTrash;\n\n  toggleTask(checked: boolean): void {\n    this.task().completed = checked;\n    this.taskToggle.emit(this.task());\n  }\n\n  deleteTask(): void {\n    this.taskDelete.emit(this.task());\n  }\n}\n\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div\n  class=\"\n    bg-bg-default border border-solid content-stretch flex gap-sm items-start\n    leading-[1.5] p-md relative rounded-md w-full text-md\n    transition-colors duration-200\n  \"\n  [class.border-green-500]=\"task().completed\"\n  [class.border-text-primary]=\"!task().completed\"\n>\n  <div class=\"shrink-0 flex items-center pt-[2px]\">\n    <app-checkbox\n      [checked]=\"task().completed\"\n      [ariaLabel]=\"'Toggle task: ' + task().text\"\n      (checkedChange)=\"toggleTask($event)\"\n    />\n  </div>\n\n  <p\n    class=\"flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2\"\n    [class.line-through]=\"task().completed\"\n    [class.text-gray-400]=\"task().completed\"\n    [class.text-text-primary]=\"!task().completed\"\n  >\n    {{ task().text }}\n  </p>\n\n  @if (!task().completed) {\n    <button\n      type=\"button\"\n      class=\"\n        shrink-0 flex items-center justify-center text-red-500 cursor-pointer\n        hover:text-red-700 focus-visible:outline focus-visible:outline-2\n        focus-visible:outline-offset-2 focus-visible:outline-error\n        rounded-sm p-1 -m-1 transition-colors ml-auto\n      \"\n      [attr.aria-label]=\"'Delete task: ' + task().text\"\n      (click)=\"deleteTask()\"\n    >\n      <fa-icon [icon]=\"faTrash\" aria-hidden=\"true\" />\n    </button>\n  }\n</div>\n"
         }
     ],
     "modules": [],
@@ -524,7 +715,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 14,
+        "count": 11,
         "status": "low",
         "files": [
             {
@@ -553,6 +744,24 @@
                 "name": "CheckboxComponent",
                 "coveragePercent": 20,
                 "coverageCount": "1/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/task-item/task-item.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TaskItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/models/task.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Task",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {

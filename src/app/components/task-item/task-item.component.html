@@ -1,0 +1,42 @@
+<div
+  class="
+    bg-bg-default border border-solid content-stretch flex gap-sm items-start
+    leading-[1.5] p-md relative rounded-md w-full text-md
+    transition-colors duration-200
+  "
+  [class.border-green-500]="task().completed"
+  [class.border-text-primary]="!task().completed"
+>
+  <div class="shrink-0 flex items-center pt-[2px]">
+    <app-checkbox
+      [checked]="task().completed"
+      [ariaLabel]="'Toggle task: ' + task().text"
+      (checkedChange)="toggleTask($event)"
+    />
+  </div>
+
+  <p
+    class="flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2"
+    [class.line-through]="task().completed"
+    [class.text-gray-400]="task().completed"
+    [class.text-text-primary]="!task().completed"
+  >
+    {{ task().text }}
+  </p>
+
+  @if (!task().completed) {
+    <button
+      type="button"
+      class="
+        shrink-0 flex items-center justify-center text-red-500 cursor-pointer
+        hover:text-red-700 focus-visible:outline focus-visible:outline-2
+        focus-visible:outline-offset-2 focus-visible:outline-error
+        rounded-sm p-1 -m-1 transition-colors ml-auto
+      "
+      [attr.aria-label]="'Delete task: ' + task().text"
+      (click)="deleteTask()"
+    >
+      <fa-icon [icon]="faTrash" aria-hidden="true" />
+    </button>
+  }
+</div>

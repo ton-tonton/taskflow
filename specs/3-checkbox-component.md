@@ -1,20 +1,23 @@
 # Checkbox Component Specification
 
 ## Overview
-A custom-styled checkbox component for task items, supporting default and completed states with appropriate visual feedback.
+A custom-styled checkbox component for task items, using `FontAwesome` icons directly for visual representation. It seamlessly transitions between a primary-colored square (unchecked) and a success-colored checked square (checked), matching the Figma specifications.
+
+## Figma links
+- default (unchecked): @https://www.figma.com/design/nDiGTKmWUjoVCvwfV7KxXO/TaskFlow?node-id=37-138&m=dev
+- completed (checked): @https://www.figma.com/design/nDiGTKmWUjoVCvwfV7KxXO/TaskFlow?node-id=37-142&m=dev
 
 ## Component Details
 
 **Type**: Atomic/Presentational Component
 **File Location**: `src/app/components/checkbox/`
-**Dependencies**: Icon component (for check and square icons)
+**Dependencies**: `@fortawesome/angular-fontawesome` (`faSquare`, `faSquareCheck`)
 
 ## Props (Inputs)
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `checked` | `boolean` | No | `false` | Whether the checkbox is checked |
-| `variant` | `'default' \| 'completed'` | No | `'default'` | Visual variant affecting border color |
 | `disabled` | `boolean` | No | `false` | Whether the checkbox is disabled |
 | `ariaLabel` | `string \| undefined` | No | `undefined` | Accessibility label |
 
@@ -30,24 +33,27 @@ None (controlled component - parent manages checked state)
 ## Template Structure
 ```html
 <label
-  class="checkbox"
-  [class.checkbox--checked]="checked()"
-  [class.checkbox--completed]="variant() === 'completed'"
-  [class.checkbox--disabled]="disabled()"
+  class="inline-flex items-center cursor-pointer relative"
+  [class.opacity-50]="disabled()"
+  [class.cursor-not-allowed]="disabled()"
 >
   <input
     type="checkbox"
-    class="checkbox__input"
+    class="sr-only peer"
     [checked]="checked()"
     [disabled]="disabled()"
     [attr.aria-label]="ariaLabel()"
     (change)="onCheckChange($event)"
   />
-  <span class="checkbox__custom">
+  <span
+    class="inline-flex items-center justify-center text-[16px] leading-[1.5] transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary rounded-sm"
+    [class.text-success]="checked()"
+    [class.text-primary]="!checked()"
+  >
     @if (checked()) {
-      <app-icon name="check" size="md" />
+      <fa-icon [icon]="faSquareCheck" aria-hidden="true" />
     } @else {
-      <app-icon name="square" size="md" />
+      <fa-icon [icon]="faSquare" aria-hidden="true" />
     }
   </span>
 </label>
@@ -55,80 +61,35 @@ None (controlled component - parent manages checked state)
 
 ## Styling Strategy
 
-### CSS Variables Used
-- `--color-border-default` (default border: black)
-- `--color-border-completed` (completed border: green) **NEW TOKEN**
-- `--color-success` (check icon color when completed) **NEW TOKEN**
-- `--color-text-primary` (default icon color)
-- `--transition-base` (smooth state transitions)
-- `--color-focus-ring` (focus indicator)
-- `--radius-sm` (border radius: 8px)
+This component uses Tailwind utility classes exclusively, following the CSS-first configuration and design system tokens described in `DESIGN_SYSTEM.md`. No custom component CSS is necessary.
 
-### CSS Classes
-```css
-.checkbox {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.checkbox--disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.checkbox__input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.checkbox__custom {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-base);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-sm);
-  padding: 2px;
-}
-
-.checkbox--completed .checkbox__custom {
-  border-color: var(--color-border-completed);
-  color: var(--color-success);
-}
-
-/* Focus state */
-.checkbox__input:focus-visible + .checkbox__custom {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
-}
-
-/* Hover state */
-.checkbox:hover:not(.checkbox--disabled) .checkbox__custom {
-  background: var(--color-hover-overlay);
-}
-```
+- **Tokens Used**:
+  - `text-success` (`--color-success`) for checked state.
+  - `text-primary` (`--color-primary`) for default, unchecked state.
+- **Focus state**: Uses Tailwind's `peer-focus-visible` functionality to target the wrapping <span> when the hidden input receives focus.
 
 ## Component Configuration
 ```typescript
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
+import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-checkbox',
-  standalone: true,
-  imports: [IconComponent],
+  imports: [FaIconComponent],
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckboxComponent {
   checked = input<boolean>(false);
-  variant = input<'default' | 'completed'>('default');
   disabled = input<boolean>(false);
   ariaLabel = input<string | undefined>(undefined);
 
   checkedChange = output<boolean>();
+
+  faSquare = faSquare;
+  faSquareCheck = faSquareCheck;
 
   onCheckChange(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -140,55 +101,26 @@ export class CheckboxComponent {
 ## Design System Integration
 
 ### Figma Mapping
-- **Default unchecked**: Black border, square icon
-- **Default checked**: Black border, check icon
-- **Completed unchecked**: Green border, square icon (unlikely state)
-- **Completed checked**: Green border, green check icon
+- **Default unchecked (37:138)**: FontAwesome `square` icon with text color mapped to `--color-primary`.
+- **Completed checked (37:142)**: FontAwesome `square-check` icon with text color mapped to `--color-success`.
 
-### Missing Design Tokens Required
-```css
-/* Add to src/styles/tokens.css */
---color-success: oklch(60% 0.15 145);           /* Green #10b981 */
---color-border-default: var(--color-gray-900);   /* Black #26232c */
---color-border-completed: var(--color-success);  /* Green */
---color-focus-ring: var(--color-primary);        /* Focus indicator */
---color-hover-overlay: rgba(0, 0, 0, 0.05);     /* Subtle hover */
-```
+*(Note: The previous extra \`variant\` enum logic has been removed. Checked and Unchecked explicitly cover the required Figma visual states directly without extra inputs.)*
 
 ## Accessibility Requirements
-- ✓ Uses native `<input type="checkbox">` for keyboard support
-- ✓ Visible focus indicator meets WCAG 2.4.7 (Focus Visible)
-- ✓ Color contrast meets WCAG AA standards
-- ✓ Supports aria-label for screen reader context
-- ✓ Disabled state prevents interaction and reduces opacity
-- ✓ Label wraps input for larger click target
+- ✓ Uses native `<input type="checkbox">` for correct interaction and screen reader compatibility.
+- ✓ Uses `.sr-only` to visually hide the real input while preserving keyboard focus.
+- ✓ Visible focus indicator meets WCAG 2.4.7, achieved via `peer-focus-visible`.
+- ✓ Icon `aria-hidden="true"` prevents redundant announcements.
+- ✓ Disabled state uses `opacity-50` and `cursor-not-allowed` logic visually while passing `[disabled]` to the native input.
 
 ## Usage Examples
 
-### Basic unchecked
-```html
-<app-checkbox
-  [checked]="false"
-  (checkedChange)="onToggle($event)"
-/>
-```
-
-### Checked with completed variant
-```html
-<app-checkbox
-  [checked]="true"
-  variant="completed"
-  (checkedChange)="onToggle($event)"
-/>
-```
-
-### With accessibility label
+### Basic usage
 ```html
 <app-checkbox
   [checked]="task.completed"
-  [variant]="task.completed ? 'completed' : 'default'"
   ariaLabel="Mark task as complete"
-  (checkedChange)="onTaskToggle($event)"
+  (checkedChange)="onToggle($event)"
 />
 ```
 
@@ -203,90 +135,45 @@ export class CheckboxComponent {
 ## Storybook Stories
 
 ### Stories to create
-1. **Default Unchecked** - Standard unchecked state
-2. **Default Checked** - Standard checked state
-3. **Completed Checked** - Checked with green styling
-4. **Disabled** - Both checked and unchecked disabled states
-5. **Interactive** - Toggleable checkbox with state display
+1. **Default Unchecked**
+2. **Completed Checked**
+3. **Disabled Checked**
+4. **Disabled Unchecked**
 
 ### Story configuration
 ```typescript
+import type { Meta, StoryObj } from '@storybook/angular';
+import { CheckboxComponent } from './checkbox.component';
+
 const meta: Meta<CheckboxComponent> = {
   title: 'Atoms/Checkbox',
   component: CheckboxComponent,
   tags: ['autodocs'],
   argTypes: {
     checked: { control: 'boolean' },
-    variant: {
-      control: 'radio',
-      options: ['default', 'completed']
-    },
-    disabled: { control: 'boolean' }
+    disabled: { control: 'boolean' },
+    ariaLabel: { control: 'text' }
   },
   args: {
     checked: false,
-    variant: 'default',
     disabled: false
   }
 };
 
-export const DefaultUnchecked: Story = {};
+export default meta;
+type Story = StoryObj<CheckboxComponent>;
 
-export const DefaultChecked: Story = {
+export const Default: Story = {};
+
+export const Checked: Story = {
   args: {
     checked: true
   }
 };
 
-export const CompletedChecked: Story = {
+export const Disabled: Story = {
   args: {
-    checked: true,
-    variant: 'completed'
+    disabled: true
   }
 };
 ```
-
-## Unit Tests
-
-### Test cases
-1. ✓ Renders unchecked by default
-2. ✓ Renders checked when checked=true
-3. ✓ Displays square icon when unchecked
-4. ✓ Displays check icon when checked
-5. ✓ Emits checkedChange with true when checked
-6. ✓ Emits checkedChange with false when unchecked
-7. ✓ Applies completed variant class
-8. ✓ Applies disabled state correctly
-9. ✓ Does not emit events when disabled
-10. ✓ Has proper focus indicator
-
-### Test example
-```typescript
-it('should emit checkedChange when toggled', () => {
-  const fixture = TestBed.createComponent(CheckboxComponent);
-  let emittedValue: boolean | undefined;
-
-  fixture.componentInstance.checkedChange.subscribe((value: boolean) => {
-    emittedValue = value;
-  });
-
-  const input = fixture.nativeElement.querySelector('input');
-  input.checked = true;
-  input.dispatchEvent(new Event('change'));
-
-  expect(emittedValue).toBe(true);
-});
-```
-
-## Implementation Notes
-- Custom checkbox uses hidden native input for accessibility
-- Visual representation via Icon component (check/square)
-- Border color changes based on variant (default: black, completed: green)
-- Smooth transitions enhance UX
-- Focus state uses outline instead of box-shadow for better visibility
-
-## Future Enhancements
-- Indeterminate state for "some items selected"
-- Animation on check/uncheck
-- Size variants (sm, md, lg)
-- Custom icon support beyond check/square

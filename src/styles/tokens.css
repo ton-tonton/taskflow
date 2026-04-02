@@ -1,160 +1,181 @@
 /**
  * TaskFlow Design Tokens
  *
- * Centralized design tokens using CSS custom properties.
- * All values use modern OKLch color space for perceptual uniformity.
+ * Centralized design tokens using CSS custom properties registered as
+ * Tailwind CSS v4 theme tokens via @theme. This enables both:
+ *   - Tailwind utility classes (e.g. `bg-primary`, `text-accent`)
+ *   - Direct CSS var() usage (e.g. `var(--color-primary)`)
+ *
+ * Naming conventions follow Tailwind v4's built-in namespaces:
+ *   --color-*     → bg-*, text-*, border-*, ring-*, etc.
+ *   --spacing-*   → p-*, m-*, gap-*, w-*, h-*, etc.
+ *   --radius-*    → rounded-*
+ *   --font-size-* → text-*
+ *   --font-family-* → font-*
  *
  * @see DESIGN_SYSTEM.md for usage guidelines
  * @see https://www.figma.com/design/nDiGTKmWUjoVCvwfV7KxXO/TaskFlow
  */
 
-@layer tokens {
-  :root {
-    /* ========================================
-       COLORS - OKLch Color Space
-       ======================================== */
+@theme {
+  /* ========================================
+     COLORS — Primitives: Sunglow
+     ======================================== */
+  --color-sunglow-50: #fffaeb;
+  --color-sunglow-100: #ffefc0;
+  --color-sunglow-200: #ffe8a1;
+  --color-sunglow-300: #ffdd76;
+  --color-sunglow-400: #ffd65c;
+  --color-sunglow-500: #ffcc33;
+  --color-sunglow-600: #e8ba2e;
+  --color-sunglow-700: #b59124;
+  --color-sunglow-800: #8c701c;
+  --color-sunglow-900: #6b5615;
 
-    /* Brand Colors */
-    --color-primary: oklch(51.01% 0.274 263.83);        /* bright-blue */
-    --color-secondary: oklch(53.18% 0.28 296.97);       /* electric-violet */
-    --color-accent: oklch(69.02% 0.277 332.77);         /* vivid-pink */
+  /* ========================================
+     COLORS — Primitives: BalticSea
+     ======================================== */
+  --color-balticsea-50: #eae9ea;
+  --color-balticsea-100: #bdbcbf;
+  --color-balticsea-200: #9d9ba0;
+  --color-balticsea-300: #706e74;
+  --color-balticsea-400: #555159;
+  --color-balticsea-500: #2a2630;
+  --color-balticsea-600: #26232c;
+  --color-balticsea-700: #1e1b22;
+  --color-balticsea-800: #17151a;
+  --color-balticsea-900: #121014;
 
-    /* Extended Palette */
-    --color-french-violet: oklch(47.66% 0.246 305.88);
-    --color-hot-red: oklch(61.42% 0.238 15.34);
-    --color-orange-red: oklch(63.32% 0.24 31.68);
+  /* ========================================
+     COLORS — Primitives: SpringWood
+     ======================================== */
+  --color-springwood-50: #fefefe;
+  --color-springwood-100: #fdfcfb;
+  --color-springwood-200: #fcfbf9;
+  --color-springwood-300: #faf9f6;
+  --color-springwood-400: #f9f8f4;
+  --color-springwood-500: #f8f6f1;
+  --color-springwood-600: #e2e0db;
+  --color-springwood-700: #b0afab;
+  --color-springwood-800: #888785;
+  --color-springwood-900: #686765;
 
-    /* Neutral Colors */
-    --color-gray-900: oklch(19.37% 0.006 300.98);       /* darkest - text */
-    --color-gray-700: oklch(36.98% 0.014 302.71);       /* medium dark */
-    --color-gray-400: oklch(70.9% 0.015 304.04);        /* light - borders */
+  /* ========================================
+     COLORS — Primitives: Green
+     ======================================== */
+  --color-green-50: #e7f8f2;
+  --color-green-100: #b5e9d8;
+  --color-green-200: #91dfc5;
+  --color-green-300: #5fd0ab;
+  --color-green-400: #40c79a;
+  --color-green-500: #10b981;
+  --color-green-600: #0fa875;
+  --color-green-700: #0b835c;
+  --color-green-800: #096647;
+  --color-green-900: #074e36;
 
-    /* Semantic Colors (Future) */
-    /* --color-success: oklch(60% 0.15 145); */
-    /* --color-warning: oklch(75% 0.15 85); */
-    /* --color-error: oklch(55% 0.22 25); */
-    /* --color-info: oklch(60% 0.15 250); */
+  /* ========================================
+     COLORS — Primitives: Red
+     ======================================== */
+  --color-red-50: #fdecec;
+  --color-red-100: #fac5c5;
+  --color-red-200: #f8a9a9;
+  --color-red-300: #f48282;
+  --color-red-400: #f26969;
+  --color-red-500: #ef4444;
+  --color-red-600: #d93e3e;
+  --color-red-700: #aa3030;
+  --color-red-800: #832525;
+  --color-red-900: #641d1d;
 
-    /* ========================================
-       TYPOGRAPHY
-       ======================================== */
+  /* ========================================
+     COLORS — Primitives: Yellow
+     ======================================== */
+  --color-yellow-50: #fef5e7;
+  --color-yellow-100: #fce1b3;
+  --color-yellow-200: #fad28f;
+  --color-yellow-300: #f8be5c;
+  --color-yellow-400: #f7b13c;
+  --color-yellow-500: #f59e0b;
+  --color-yellow-600: #df900a;
+  --color-yellow-700: #ae7008;
+  --color-yellow-800: #875706;
+  --color-yellow-900: #674205;
 
-    /* Font Families */
-    --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    --font-family-heading: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+  /* ========================================
+     COLORS — Semantic aliases
+     Tailwind generates: bg-primary, text-accent, etc.
+     ======================================== */
+  --color-primary: var(--color-balticsea-500);
+  --color-accent: var(--color-sunglow-500);
+  --color-success: var(--color-green-500);
+  --color-error: var(--color-red-500);
 
-    /* Font Sizes - 1rem = 16px base */
-    --font-size-xs: 0.75rem;       /* 12px */
-    --font-size-sm: 0.875rem;      /* 14px */
-    --font-size-base: 1rem;        /* 16px */
-    --font-size-lg: 1.125rem;      /* 18px */
-    --font-size-xl: 1.25rem;       /* 20px */
-    --font-size-2xl: 1.5rem;       /* 24px */
-    --font-size-3xl: 1.875rem;     /* 30px */
-    --font-size-4xl: 2.25rem;      /* 36px */
-    --font-size-display: 3.125rem; /* 50px */
+  /* Text */
+  --color-text-primary: var(--color-balticsea-600);
+  --color-text-secondary: var(--color-springwood-100);
+  --color-text-inverse: var(--color-springwood-100);
 
-    /* Font Weights */
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
+  /* Background */
+  --color-bg-default: var(--color-springwood-500);
 
-    /* Line Heights */
-    --line-height-tight: 1.2;
-    --line-height-normal: 1.5;
-    --line-height-relaxed: 1.75;
+  /* Disabled / muted states */
+  --color-primary-muted: var(--color-balticsea-100);
+  --color-text-disabled: var(--color-springwood-50);
 
-    /* Letter Spacing */
-    --letter-spacing-tight: -0.0125rem;   /* -0.2px */
-    --letter-spacing-normal: 0;
-    --letter-spacing-wide: 0.025rem;      /* 0.4px */
+  /* ========================================
+     COLORS — Component: Button / Primary
+     ======================================== */
+  --color-btn-primary-bg:          var(--color-primary);
+  --color-btn-primary-bg-hover:    var(--color-primary);
+  --color-btn-primary-bg-active:   var(--color-accent);
+  --color-btn-primary-bg-disabled: var(--color-primary-muted);
 
-    /* ========================================
-       SPACING - 4px base unit
-       ======================================== */
+  --color-btn-primary-text:          var(--color-text-inverse);
+  --color-btn-primary-text-hover:    var(--color-accent);
+  --color-btn-primary-text-active:   var(--color-primary);
+  --color-btn-primary-text-disabled: var(--color-text-disabled);
 
-    --spacing-0: 0;
-    --spacing-xs: 0.25rem;   /* 4px */
-    --spacing-sm: 0.5rem;    /* 8px */
-    --spacing-md: 1rem;      /* 16px */
-    --spacing-lg: 1.5rem;    /* 24px */
-    --spacing-xl: 2rem;      /* 32px */
-    --spacing-2xl: 3rem;     /* 48px */
-    --spacing-3xl: 4rem;     /* 64px */
-    --spacing-4xl: 6rem;     /* 96px */
+  --color-btn-primary-border: var(--color-primary);
 
-    /* ========================================
-       BORDER RADIUS
-       ======================================== */
+  /* ========================================
+     TYPOGRAPHY
+     --font-base        → font-base utility (font-family)
+     --font-size-*      → text-* utilities (font-size)
+     ======================================== */
 
-    --radius-none: 0;
-    --radius-sm: 0.25rem;    /* 4px */
-    --radius-md: 0.5rem;     /* 8px */
-    --radius-lg: 1rem;       /* 16px */
-    --radius-xl: 1.5rem;     /* 24px */
-    --radius-2xl: 2rem;      /* 32px */
-    --radius-full: 9999px;   /* pill / circle */
+  /* Generates the `font-base` utility class */
+  --font-base: "IBM Plex Sans Thai", sans-serif;
 
-    /* ========================================
-       SHADOWS
-       ======================================== */
+  /* Generates text-xs … text-5xl utilities. Overrides Tailwind defaults intentionally. */
+  --font-size-xs: 10px;
+  --font-size-sm: 13px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 25px;
+  --font-size-2xl: 31px;
+  --font-size-3xl: 39px;
+  --font-size-4xl: 49px;
+  --font-size-5xl: 61px;
 
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  /* ========================================
+     SPACING
+     Tailwind generates: p-xs, m-sm, gap-md, etc.
+     ======================================== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
 
-    /* ========================================
-       GRADIENTS
-       ======================================== */
-
-    --gradient-vertical: linear-gradient(
-      180deg,
-      var(--color-orange-red) 0%,
-      var(--color-accent) 50%,
-      var(--color-secondary) 100%
-    );
-
-    --gradient-horizontal: linear-gradient(
-      90deg,
-      var(--color-orange-red) 0%,
-      var(--color-accent) 50%,
-      var(--color-secondary) 100%
-    );
-
-    /* ========================================
-       Z-INDEX
-       ======================================== */
-
-    --z-index-dropdown: 1000;
-    --z-index-sticky: 1020;
-    --z-index-fixed: 1030;
-    --z-index-modal-backdrop: 1040;
-    --z-index-modal: 1050;
-    --z-index-popover: 1060;
-    --z-index-tooltip: 1070;
-
-    /* ========================================
-       TRANSITIONS
-       ======================================== */
-
-    --transition-fast: 150ms ease-in-out;
-    --transition-base: 200ms ease-in-out;
-    --transition-slow: 300ms ease-in-out;
-
-    /* ========================================
-       BREAKPOINTS (Reference - use in media queries)
-       ======================================== */
-
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1536px;
-  }
+  /* ========================================
+     BORDER RADIUS
+     Tailwind generates: rounded-sm, rounded-md, etc.
+     ======================================== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
 }

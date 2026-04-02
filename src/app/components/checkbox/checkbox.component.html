@@ -1,0 +1,33 @@
+<label
+  class="inline-flex items-center cursor-pointer relative"
+  [class.opacity-50]="disabled()"
+  [class.cursor-not-allowed]="disabled()"
+>
+  <input
+    type="checkbox"
+    class="sr-only peer"
+    [checked]="checked()"
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabel()"
+    (change)="onCheckChange($event)"
+  />
+  <span
+    class="
+      inline-flex items-center justify-center
+      text-[16px] leading-[1.5]
+      transition-colors rounded-sm
+      peer-focus-visible:outline
+      peer-focus-visible:outline-2
+      peer-focus-visible:outline-offset-2
+      peer-focus-visible:outline-primary
+    "
+    [class.text-success]="checked()"
+    [class.text-primary]="!checked()"
+  >
+    @if (checked()) {
+      <fa-icon [icon]="faSquareCheck" aria-hidden="true" />
+    } @else {
+      <fa-icon [icon]="faSquare" aria-hidden="true" />
+    }
+  </span>
+</label>

@@ -34,6 +34,8 @@ ng generate component <name> --prefix=app  # Generate with custom prefix
 ng generate --help                      # View all available schematics
 ```
 
+> **IMPORTANT**: Always use the Angular CLI (`ng generate component`) to scaffold new components. Never create component files manually with file-writing tools. If you are unsure of the correct command or options, use the `angular-cli` MCP tools to look up the available schematics and parameters before running the command.
+
 ## Architecture Patterns
 
 ### Component Structure
@@ -44,6 +46,19 @@ ng generate --help                      # View all available schematics
 - **Global styles**: `src/styles.css` with `@import "tailwindcss"`
 - **Component styles**: Component-specific CSS files (e.g., `button.css`)
 - **Tailwind CSS v4**: Uses CSS-first configuration (no `tailwind.config.js` by default)
+- **Tailwind class formatting**: Keep utility classes in the template. For long class strings, break across lines for readability — do NOT use `@apply`. This follows community convention (Tailwind UI, shadcn/ui).
+
+```html
+<span
+  class="
+    inline-flex items-center justify-center
+    text-[16px] leading-[1.5]
+    transition-colors rounded-sm
+    peer-focus-visible:outline
+    peer-focus-visible:outline-2
+  "
+>
+```
 
 ## Storybook Configuration
 

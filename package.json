@@ -39,14 +39,14 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2101.0",
+    "@angular-devkit/architect": "^0.2102.6",
     "@angular-devkit/build-angular": "^21.1.0",
     "@angular-devkit/core": "^21.1.0",
     "@angular/build": "^21.1.4",
     "@angular/cli": "^21.1.4",
     "@angular/compiler-cli": "^21.1.0",
     "@angular/platform-browser-dynamic": "^21.1.0",
-    "@compodoc/compodoc": "^1.2.1",
+    "@compodoc/compodoc": "^1.1.23",
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@storybook/addon-a11y": "^10.2.8",
     "@storybook/addon-docs": "^10.2.8",

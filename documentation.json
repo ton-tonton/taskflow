@@ -15,14 +15,13 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
-                    "indexKey": "",
                     "optional": false,
                     "description": "",
                     "line": 2
                 }
             ],
             "indexSignatures": [],
-            "kind": 172,
+            "kind": 171,
             "methods": [],
             "extends": []
         }
@@ -58,8 +57,7 @@
                     "defaultValue": "signal('taskflow')",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
+                    "type": "",
                     "optional": false,
                     "description": "",
                     "line": 11,
@@ -129,18 +127,17 @@
                         {
                             "pos": 760,
                             "end": 773,
-                            "kind": 328,
-                            "id": 0,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
+                            "kind": 334,
                             "tagName": {
                                 "pos": 761,
                                 "end": 769,
-                                "kind": 80,
-                                "id": 0,
                                 "flags": 16842752,
+                                "modifierFlagsCache": 0,
                                 "transformFlags": 0,
+                                "kind": 80,
                                 "escapedText": "required"
                             },
                             "comment": ""
@@ -224,6 +221,91 @@
                     }
                 }
             }
+        },
+        {
+            "name": "CheckboxComponent",
+            "id": "component-CheckboxComponent-8e98c01444c028764efc3d1ec8d35160b83e95235160bc6ddf97a1a0d08718c6aa205c4db9a5120204fad05d450c5463878ad2f61c1368b425abd7a2ff62890b",
+            "file": "src/app/components/checkbox/checkbox.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-checkbox",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./checkbox.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "ariaLabel",
+                    "defaultValue": "input<string | undefined>(undefined)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "checked",
+                    "defaultValue": "input<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "checkedChange",
+                    "defaultValue": "output<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Event emitted when the checkbox state changes.</p>\n",
+                    "line": 20,
+                    "rawdescription": "\n\nEvent emitted when the checkbox state changes.\n"
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "input<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "FaIconComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faSquare } from '@fortawesome/free-regular-svg-icons';\nimport { faSquareCheck } from '@fortawesome/free-solid-svg-icons';\n\n@Component({\n  selector: 'app-checkbox',\n  imports: [FaIconComponent],\n  templateUrl: './checkbox.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CheckboxComponent {\n  checked = input<boolean>(false);\n  disabled = input<boolean>(false);\n  ariaLabel = input<string | undefined>(undefined);\n\n  /**\n   * Event emitted when the checkbox state changes.\n   */\n  checkedChange = output<boolean>();\n\n  /**\n   * Unchecked state icon.\n   * @ignore\n   */\n  readonly faSquare = faSquare;\n\n  /**\n   * Checked state icon.\n   * @ignore\n   */\n  readonly faSquareCheck = faSquareCheck;\n\n  /**\n   * Handles the native change event and emits the new state.\n   * @ignore\n   * @param event The change event triggered by the native checkbox\n   */\n  onCheckChange(event: Event): void {\n    const target = event.target as HTMLInputElement;\n    this.checkedChange.emit(target.checked);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label\n  class=\"inline-flex items-center cursor-pointer relative\"\n  [class.opacity-50]=\"disabled()\"\n  [class.cursor-not-allowed]=\"disabled()\"\n>\n  <input\n    type=\"checkbox\"\n    class=\"sr-only peer\"\n    [checked]=\"checked()\"\n    [disabled]=\"disabled()\"\n    [attr.aria-label]=\"ariaLabel()\"\n    (change)=\"onCheckChange($event)\"\n  />\n  <span\n    class=\"\n      inline-flex items-center justify-center\n      text-[16px] leading-[1.5]\n      transition-colors rounded-sm\n      peer-focus-visible:outline\n      peer-focus-visible:outline-2\n      peer-focus-visible:outline-offset-2\n      peer-focus-visible:outline-primary\n    \"\n    [class.text-success]=\"checked()\"\n    [class.text-primary]=\"!checked()\"\n  >\n    @if (checked()) {\n      <fa-icon [icon]=\"faSquareCheck\" aria-hidden=\"true\" />\n    } @else {\n      <fa-icon [icon]=\"faSquare\" aria-hidden=\"true\" />\n    }\n  </span>\n</label>\n"
         },
         {
             "name": "HeaderComponent",
@@ -312,107 +394,6 @@
             "extends": []
         },
         {
-            "name": "IconComponent",
-            "id": "component-IconComponent-a32b807a72f87742908c2da401709976ede8ed2a98000b441867d21f24a2a872d707f230e699ae75b719f7a85208b083c27fb8239a8533223c27109ca77d4d52",
-            "file": "src/app/components/icon/icon.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [
-                "ViewEncapsulation.None"
-            ],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-icon",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./icon.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "color",
-                    "defaultValue": "'primary'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "IconColor",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 39,
-                    "required": false
-                },
-                {
-                    "name": "name",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "IconName",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 36,
-                    "required": true
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'md'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "IconSize",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 38,
-                    "required": false
-                },
-                {
-                    "name": "type",
-                    "defaultValue": "'solid'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "IconType",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 37,
-                    "required": false
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "computedClass",
-                    "defaultValue": "computed(() => ({\n    [`fa-${this.type()}`]: true,\n    [`fa-${this.name()}`]: true,\n    [`text-${this.size()}`]: true,\n    [`text-${this.color()}`]: true,\n    'icon-base': true,\n  }))",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 41
-                }
-            ],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  ViewEncapsulation,\n  computed,\n  input,\n} from '@angular/core';\n\nexport const ICON_NAMES = [\n  'calendar-day',\n  'calendar-week',\n  'inbox',\n  'list-check',\n  'plus',\n  'trash',\n  'xmark',\n] as const;\n\nexport const ICON_TYPES = ['solid'] as const;\nexport const ICON_SIZES = ['sm', 'md', 'lg', 'xl'] as const;\nexport const ICON_COLORS = ['primary', 'secondary'] as const;\n\nexport type IconName = (typeof ICON_NAMES)[number];\nexport type IconType = (typeof ICON_TYPES)[number];\nexport type IconSize = (typeof ICON_SIZES)[number];\nexport type IconColor = (typeof ICON_COLORS)[number];\n\n@Component({\n  selector: 'app-icon',\n  templateUrl: './icon.component.html',\n  styleUrl: './icon.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  encapsulation: ViewEncapsulation.None,\n})\nexport class IconComponent {\n  name = input.required<IconName>();\n  type = input<IconType>('solid');\n  size = input<IconSize>('md');\n  color = input<IconColor>('primary');\n\n  computedClass = computed(() => ({\n    [`fa-${this.type()}`]: true,\n    [`fa-${this.name()}`]: true,\n    [`text-${this.size()}`]: true,\n    [`text-${this.color()}`]: true,\n    'icon-base': true,\n  }));\n}\n",
-            "styleUrl": "./icon.component.css",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "extends": [],
-            "templateData": "<i\n  [class]=\"computedClass()\"\n  aria-hidden=\"true\"\n></i>\n"
-        },
-        {
             "name": "PageComponent",
             "id": "component-PageComponent-21dd6eb370b4983b5c21c84d40e6f54d266a9d9af9889e6e76b35c43058bd53b3e451bad089d5adf4bea46647ba10265a2fa8cb15630398e75636307d4817fc6",
             "file": "src/stories/page.component.ts",
@@ -439,7 +420,6 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "User | null",
-                    "indexKey": "",
                     "optional": false,
                     "description": "",
                     "line": 69
@@ -519,105 +499,10 @@
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
                 "defaultValue": "{\n  providers: [\n    provideBrowserGlobalErrorListeners(),\n    provideRouter(routes)\n  ]\n}"
-            },
-            {
-                "name": "ICON_COLORS",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "['primary', 'secondary'] as const"
-            },
-            {
-                "name": "ICON_NAMES",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "[\n  'calendar-day',\n  'calendar-week',\n  'inbox',\n  'list-check',\n  'plus',\n  'trash',\n  'xmark',\n] as const"
-            },
-            {
-                "name": "ICON_SIZES",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "['sm', 'md', 'lg', 'xl'] as const"
-            },
-            {
-                "name": "ICON_TYPES",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "['solid'] as const"
-            },
-            {
-                "name": "routes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/app.routes.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Routes",
-                "defaultValue": "[]"
             }
         ],
         "functions": [],
-        "typealiases": [
-            {
-                "name": "IconColor",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "unknown",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 200
-            },
-            {
-                "name": "IconName",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "unknown",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 200
-            },
-            {
-                "name": "IconSize",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "unknown",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 200
-            },
-            {
-                "name": "IconType",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "unknown",
-                "file": "src/app/components/icon/icon.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 200
-            }
-        ],
+        "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
             "src/app/app.config.ts": [
@@ -631,120 +516,15 @@
                     "type": "ApplicationConfig",
                     "defaultValue": "{\n  providers: [\n    provideBrowserGlobalErrorListeners(),\n    provideRouter(routes)\n  ]\n}"
                 }
-            ],
-            "src/app/components/icon/icon.component.ts": [
-                {
-                    "name": "ICON_COLORS",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "defaultValue": "['primary', 'secondary'] as const"
-                },
-                {
-                    "name": "ICON_NAMES",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "defaultValue": "[\n  'calendar-day',\n  'calendar-week',\n  'inbox',\n  'list-check',\n  'plus',\n  'trash',\n  'xmark',\n] as const"
-                },
-                {
-                    "name": "ICON_SIZES",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "defaultValue": "['sm', 'md', 'lg', 'xl'] as const"
-                },
-                {
-                    "name": "ICON_TYPES",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "defaultValue": "['solid'] as const"
-                }
-            ],
-            "src/app/app.routes.ts": [
-                {
-                    "name": "routes",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/app.routes.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Routes",
-                    "defaultValue": "[]"
-                }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
-        "groupedTypeAliases": {
-            "src/app/components/icon/icon.component.ts": [
-                {
-                    "name": "IconColor",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "unknown",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 200
-                },
-                {
-                    "name": "IconName",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "unknown",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 200
-                },
-                {
-                    "name": "IconSize",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "unknown",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 200
-                },
-                {
-                    "name": "IconType",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "unknown",
-                    "file": "src/app/components/icon/icon.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 200
-                }
-            ]
-        }
+        "groupedTypeAliases": {}
     },
-    "routes": {
-        "name": "<root>",
-        "kind": "module",
-        "children": []
-    },
+    "routes": [],
     "coverage": {
-        "count": 5,
+        "count": 14,
         "status": "low",
         "files": [
             {
@@ -753,16 +533,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "appConfig",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/app.routes.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "routes",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -777,92 +547,12 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/icon/icon.component.ts",
+                "filePath": "src/app/components/checkbox/checkbox.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "IconComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/6",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_COLORS",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_NAMES",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_SIZES",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_TYPES",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "IconColor",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "IconName",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "IconSize",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/icon/icon.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "IconType",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "name": "CheckboxComponent",
+                "coveragePercent": 20,
+                "coverageCount": "1/5",
                 "status": "low"
             },
             {

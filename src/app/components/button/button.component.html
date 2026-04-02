@@ -1,0 +1,18 @@
+<button
+  [type]="type()"
+  [disabled]="disabled()"
+  [attr.aria-label]="ariaLabel()"
+  (click)="onClick($event)"
+  class="
+    inline-flex items-center justify-center font-base font-semibold
+    leading-[1.5] transition-colors rounded-md
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+    whitespace-nowrap shrink-0 border-2 border-solid cursor-pointer
+    border-primary active:shadow-none
+    disabled:bg-primary-muted disabled:border-primary-muted disabled:text-text-disabled
+    disabled:shadow-none disabled:cursor-not-allowed
+  "
+  [class]="buttonClasses()"
+>
+  <ng-content />
+</button>

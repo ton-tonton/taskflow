@@ -90,7 +90,7 @@ Compodoc auto-generates component documentation:
 
 ## Component Development Workflow
 
-1. **Generate component**: `ng generate component <name>`
+1. **Generate component**: `ng generate component <name>` (Must enforce the `.component` suffix for generated files, e.g., `[name].component.ts`. Rename them manually if the CLI defaults to a flat suffix like `.ts`)
 2. **Create story**: Add `.stories.ts` file in same directory or `src/stories/`
 3. **Use signals**: For reactive state instead of traditional properties
 4. **Tailwind styling**: Import component CSS and use Tailwind utilities
@@ -117,6 +117,7 @@ When creating components from Figma designs:
 
 - Always use standalone components over NgModules
 - Convention: Use separate files (`.html`, `.css`, `.ts`) for standard components. Inline templates and styles are reserved for small, simple components (e.g. < 15 lines).
+- **Component File Naming**: All component files must follow the `.component.[ext]` suffix pattern (e.g. `foo.component.ts`, `foo.component.html`, `foo.component.css`, `foo.component.spec.ts`). If the Angular CLI generates files without the `.component` suffix, you **must rename** them and update their internal imports.
 - Must NOT set `standalone: true` inside Angular decorators. It's the default in Angular v20+.
 - Use signals for state management
 - Implement lazy loading for feature routes

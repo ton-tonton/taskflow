@@ -127,7 +127,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-7c5f159fd5835272e5d98e464d5f224512bd74d52e90e0a7509e538884122041ce4b4850676f6a9de02cf50fd72638e1d82c1e6eddc09005b5da69c79e0b397a",
+            "id": "component-ButtonComponent-aea5f508bd19d61c60507d91a71c514d7f2ffa9710e5a89d57d51c78c1386c1fdfb80c11209e15213ed4d1cbf9a8ec1e5efb8fadf05c9937bf3cef15f7a4610e",
             "file": "src/app/components/button/button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -136,9 +136,7 @@
             "outputs": [],
             "providers": [],
             "selector": "app-button",
-            "styleUrls": [
-                "./button.component.css"
-            ],
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
                 "./button.component.html"
@@ -156,7 +154,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 39
+                    "line": 38
                 },
                 {
                     "name": "clicked",
@@ -166,7 +164,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 41
+                    "line": 40
                 },
                 {
                     "name": "disabled",
@@ -176,7 +174,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 37
+                    "line": 36
                 },
                 {
                     "name": "size",
@@ -186,7 +184,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 36
+                    "line": 35
                 },
                 {
                     "name": "type",
@@ -196,7 +194,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 38
+                    "line": 37
                 },
                 {
                     "name": "variant",
@@ -206,7 +204,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 35
+                    "line": 34
                 }
             ],
             "methodsClass": [],
@@ -219,14 +217,9 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';\n\nconst SIZE_MAP: Record<'sm' | 'md' | 'lg', string> = {\n  sm: 'px-md py-xs text-sm',\n  md: 'px-lg py-sm text-md', // token sizes: lg = 24px, sm = 8px, font-size-md = 16px\n  lg: 'px-xl py-md text-lg'\n};\n\nconst VARIANT_MAP: Record<'primary' | 'outline' | 'error', string> = {\n  primary: `\n    bg-primary text-text-inverse\n    hover:bg-primary hover:text-accent hover:shadow-[0_2px_2px_0_var(--color-accent)]\n    active:bg-accent active:text-primary active:border-primary\n  `,\n  outline: `\n    bg-bg-default text-text-primary\n    hover:bg-bg-default hover:border-accent hover:text-accent hover:shadow-[0_2px_2px_0_var(--color-accent)]\n    active:bg-bg-default active:border-accent active:text-accent\n  `,\n  error: `\n    bg-error text-text-inverse\n    hover:bg-primary hover:border-primary hover:text-error hover:shadow-[0_2px_2px_0_var(--color-error)]\n    active:bg-error active:border-error active:text-text-inverse\n  `\n};\n\n@Component({\n  selector: 'app-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.css'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ButtonComponent {\n  variant = input<'primary' | 'outline' | 'error'>('primary');\n  size = input<'sm' | 'md' | 'lg'>('md');\n  disabled = input(false);\n  type = input<'button' | 'submit' | 'reset'>('button');\n  ariaLabel = input<string>();\n\n  clicked = output<MouseEvent>();\n\n  /**\n   * @ignore\n   * Handles the click event on the button.\n   * @param event Event\n   */\n  onClick(event: MouseEvent) {\n    if (!this.disabled()) {\n      this.clicked.emit(event);\n    }\n  }\n\n  /**\n   * @ignore\n   * Computes the CSS classes for the button based on its variant and size.\n   */\n  buttonClasses = computed(() => {\n    const s = this.size();\n    const sizeClasses = SIZE_MAP[s] || SIZE_MAP.md;\n\n    const v = this.variant();\n    const variantClasses = VARIANT_MAP[v] || VARIANT_MAP.primary;\n\n    return `${sizeClasses} ${variantClasses}`;\n  });\n}\n",
+            "sourceCode": "import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';\n\nconst SIZE_MAP: Record<'sm' | 'md' | 'lg', string> = {\n  sm: 'px-md py-xs text-sm',\n  md: 'px-lg py-sm text-md', // token sizes: lg = 24px, sm = 8px, font-size-md = 16px\n  lg: 'px-xl py-md text-lg'\n};\n\nconst VARIANT_MAP: Record<'primary' | 'outline' | 'error', string> = {\n  primary: `\n    bg-primary text-text-inverse\n    hover:bg-primary hover:text-accent hover:shadow-[0_2px_2px_0_var(--color-accent)]\n    active:bg-accent active:text-primary active:border-primary\n  `,\n  outline: `\n    bg-bg-default text-text-primary\n    hover:bg-bg-default hover:border-accent hover:text-accent hover:shadow-[0_2px_2px_0_var(--color-accent)]\n    active:bg-bg-default active:border-accent active:text-accent\n  `,\n  error: `\n    bg-error text-text-inverse\n    hover:bg-primary hover:border-primary hover:text-error hover:shadow-[0_2px_2px_0_var(--color-error)]\n    active:bg-error active:border-error active:text-text-inverse\n  `\n};\n\n@Component({\n  selector: 'app-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ButtonComponent {\n  variant = input<'primary' | 'outline' | 'error'>('primary');\n  size = input<'sm' | 'md' | 'lg'>('md');\n  disabled = input(false);\n  type = input<'button' | 'submit' | 'reset'>('button');\n  ariaLabel = input<string>();\n\n  clicked = output<MouseEvent>();\n\n  /**\n   * @ignore\n   * Handles the click event on the button.\n   * @param event Event\n   */\n  onClick(event: MouseEvent) {\n    if (!this.disabled()) {\n      this.clicked.emit(event);\n    }\n  }\n\n  /**\n   * @ignore\n   * Computes the CSS classes for the button based on its variant and size.\n   */\n  buttonClasses = computed(() => {\n    const s = this.size();\n    const sizeClasses = SIZE_MAP[s] || SIZE_MAP.md;\n\n    const v = this.variant();\n    const variantClasses = VARIANT_MAP[v] || VARIANT_MAP.primary;\n\n    return `${sizeClasses} ${variantClasses}`;\n  });\n}\n",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./button.component.css"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
             "templateData": "<button\n  [type]=\"type()\"\n  [disabled]=\"disabled()\"\n  [attr.aria-label]=\"ariaLabel()\"\n  (click)=\"onClick($event)\"\n  class=\"\n    inline-flex items-center justify-center font-base font-semibold\n    leading-[1.5] transition-colors rounded-md\n    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent\n    whitespace-nowrap shrink-0 border-2 border-solid cursor-pointer\n    border-primary active:shadow-none\n    disabled:bg-primary-muted disabled:border-primary-muted disabled:text-text-disabled\n    disabled:shadow-none disabled:cursor-not-allowed\n  \"\n  [class]=\"buttonClasses()\"\n>\n  <ng-content />\n</button>\n"

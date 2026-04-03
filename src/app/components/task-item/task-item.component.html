@@ -11,7 +11,7 @@
     <app-checkbox
       [checked]="task().completed"
       [ariaLabel]="'Toggle task: ' + task().text"
-      (checkedChange)="toggleTask($event)"
+      (checkedChange)="toggleTask()"
     />
   </div>
 

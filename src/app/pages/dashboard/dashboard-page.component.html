@@ -1,0 +1,46 @@
+<div class="flex h-screen w-screen bg-bg-default overflow-hidden">
+  <app-side-menu
+    [activeView]="activeView()"
+    [navCounts]="navCounts()"
+  />
+
+  <main class="flex-1 overflow-y-auto relative">
+    <div class="max-w-[1068px] mx-auto pt-[33px] px-[61px] pb-[61px] flex flex-col gap-[36px]">
+      <app-add-task-button (clicked)="onAddTaskPrompt()" />
+
+      @if (todayTasks().length > 0) {
+        <app-task-list
+          title="Tasks"
+          [tasks]="todayTasks()"
+          (taskToggle)="onToggleTask($event)"
+          (taskDelete)="onDeleteTaskPrompt($event)"
+        />
+      }
+
+      @if (completedTasks().length > 0) {
+        <app-task-list
+          title="Completed"
+          [tasks]="completedTasks()"
+          (taskToggle)="onToggleTask($event)"
+          (taskDelete)="onDeleteTaskPrompt($event)"
+        />
+      }
+    </div>
+
+    <!-- Modals -->
+    <app-add-task-modal
+      [isOpen]="isAddModalOpen()"
+      (taskAdded)="onAddTask($event)"
+      (closed)="onAddModalClosed()"
+    />
+
+    @if (taskToDelete() !== null) {
+      <app-delete-task-modal
+        [isOpen]="isDeleteModalOpen()"
+        [taskId]="taskToDelete()!"
+        (confirmDelete)="onConfirmDelete($event)"
+        (closed)="onDeleteModalClosed()"
+      />
+    }
+  </main>
+</div>

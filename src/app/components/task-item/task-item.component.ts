@@ -21,8 +21,7 @@ export class TaskItem {
 
   readonly faTrash = faTrash;
 
-  toggleTask(checked: boolean): void {
-    this.task().completed = checked;
+  toggleTask(): void {
     this.taskToggle.emit(this.task());
   }
 

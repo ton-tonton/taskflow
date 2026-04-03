@@ -98,25 +98,11 @@ onNavigate(view: ViewType): void {
 
 Note: Sidebar handles its own fixed width (250px) and the main content area fills the remaining space.
 
+- add-task-button: when click open add-task-modal
+- onDeleteTask: open delete-task-modal
 
 ## Routing Setup
 Register the dashboard route in `src/app/app.routes.ts`:
-
-```typescript
-import { Routes } from '@angular/router';
-
-export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
-      )
-  }
-];
-```
-
-Lazy loading ensures the dashboard bundle is only loaded when the route is accessed.
 
 ## Service Interaction: TaskService
 
@@ -175,7 +161,6 @@ app-task-list re-renders updated task items
         ▼
 app-task-item shows new visual state (OnPush)
 ```
-
 
 ## Storybook Stories
 DashboardPage is a high-level smart component. Consider adding a story that demonstrates the full composition:

@@ -1,13 +1,16 @@
 # DashboardPage Component Specification
 
 ## Overview
-The top-level smart component that orchestrates the entire dashboard. Manages application state via signals, injects the TaskService, and composes all layout components.
+The top-level smart component that orchestrates the entire dashboard. Manages application state via signals, injects the TaskService, and composes all layout components directly (Sidebar and main content area).
+
+## Figma links
+@https://www.figma.com/design/nDiGTKmWUjoVCvwfV7KxXO/TaskFlow?node-id=24-68&m=dev
 
 ## Component Details
 
 **Type**: Smart/Container Component (Page-level)
 **File Location**: `src/app/pages/dashboard/`
-**Dependencies**: Sidebar, MainContent, TaskService
+**Dependencies**: Sidebar, AddTaskButton, TaskList, AddTaskModal, DeleteTaskModal, TaskService
 
 ## Props (Inputs)
 None — this is a routed page component
@@ -61,79 +64,40 @@ onNavigate(view: ViewType): void {
 ## Template Structure
 ```html
 <div class="dashboard">
-  <app-sidebar
+  <app-side-menu
     [activeView]="activeView()"
     [navCounts]="navCounts()"
     (navItemClick)="onNavigate($event)"
   />
 
-  <app-main-content
-    [activeView]="activeView()"
-    [todayTasks]="todayTasks()"
-    [completedTasks]="completedTasks()"
-    (taskAdd)="onAddTask($event)"
-    (taskToggle)="onToggleTask($event)"
-    (taskDelete)="onDeleteTask($event)"
-  />
+  <main class="main-content">
+    <div class="task-sections">
+      <app-add-task-button />
+
+      <app-task-list
+        title="Today's Tasks"
+        [tasks]="todayTasks()"
+        (taskToggle)="onToggleTask($event)"
+        (taskDelete)="onDeleteTask($event)"
+      />
+
+      <app-task-list
+        title="Completed Tasks"
+        [tasks]="completedTasks()"
+        (taskToggle)="onToggleTask($event)"
+        (taskDelete)="onDeleteTask($event)"
+      />
+    </div>
+
+    <!-- Modals -->
+    <app-add-task-modal (taskAdd)="onAddTask($event)" />
+    <app-delete-task-modal />
+  </main>
 </div>
-```
-
-## Styling Strategy
-
-### CSS Classes
-```css
-.dashboard {
-  display: flex;
-  min-height: 100vh;
-  background: var(--color-bg-default);
-}
 ```
 
 Note: Sidebar handles its own fixed width (250px) and the main content area fills the remaining space.
 
-## Component Configuration
-```typescript
-@Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [SidebarComponent, MainContentComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class DashboardComponent {
-  private taskService = inject(TaskService);
-
-  // Local UI state
-  activeView = signal<ViewType>('inbox');
-
-  // Derived from service
-  todayTasks = this.taskService.todayTasks;
-  completedTasks = this.taskService.completedTasks;
-
-  navCounts = computed<NavCounts>(() => ({
-    inbox: this.taskService.inboxCount(),
-    today: this.taskService.todayCount(),
-    completed: this.taskService.completedCount()
-  }));
-
-  onAddTask(text: string): void {
-    this.taskService.addTask(text);
-  }
-
-  onToggleTask(id: string): void {
-    this.taskService.toggleTask(id);
-  }
-
-  onDeleteTask(id: string): void {
-    this.taskService.deleteTask(id);
-  }
-
-  onNavigate(view: ViewType): void {
-    this.activeView.set(view);
-  }
-}
-```
 
 ## Routing Setup
 Register the dashboard route in `src/app/app.routes.ts`:
@@ -212,25 +176,6 @@ app-task-list re-renders updated task items
 app-task-item shows new visual state (OnPush)
 ```
 
-## Smart vs Presentational Separation
-
-| Responsibility | DashboardComponent | Child Components |
-|---------------|-------------------|------------------|
-| State management | ✓ via TaskService | ✗ |
-| Business logic | ✓ toggle/add/delete | ✗ |
-| Visual rendering | Minimal | ✓ |
-| Data derivation | ✓ computed signals | ✓ derived computeds |
-| User interactions | Handles events | Emits events |
-
-## Accessibility Requirements
-- ✓ Page has logical structure: sidebar + main
-- ✓ Skip-to-content link (optional, recommended for keyboard users)
-- ✓ Page title updates with route (via `<title>` tag or Angular `Title` service)
-- ✓ Focus management on navigation change
-- ✓ All landmarks properly labelled
-
-## Usage
-This component is used as a routed page component. Not intended for direct embedding.
 
 ## Storybook Stories
 DashboardPage is a high-level smart component. Consider adding a story that demonstrates the full composition:
@@ -254,57 +199,3 @@ export const WithTasks: Story = {
 
 Note: In Storybook, use `providers` to mock the `TaskService` with pre-loaded tasks to avoid needing real state management.
 
-## Unit Tests
-
-### Test cases
-1. ✓ Renders Sidebar component
-2. ✓ Renders MainContent component
-3. ✓ Passes activeView to Sidebar and MainContent
-4. ✓ Passes navCounts to Sidebar
-5. ✓ Calls taskService.addTask when taskAdd emitted
-6. ✓ Calls taskService.toggleTask when taskToggle emitted
-7. ✓ Calls taskService.deleteTask when taskDelete emitted
-8. ✓ Updates activeView signal on navigation
-9. ✓ todayTasks derives from taskService.todayTasks
-10. ✓ completedTasks derives from taskService.completedTasks
-
-### Test example
-```typescript
-it('should call taskService.addTask when task is added', () => {
-  const mockTaskService = {
-    todayTasks: signal([]),
-    completedTasks: signal([]),
-    inboxCount: signal(0),
-    todayCount: signal(0),
-    completedCount: signal(0),
-    addTask: jasmine.createSpy('addTask'),
-    toggleTask: jasmine.createSpy('toggleTask'),
-    deleteTask: jasmine.createSpy('deleteTask')
-  };
-
-  TestBed.configureTestingModule({
-    providers: [
-      { provide: TaskService, useValue: mockTaskService }
-    ]
-  });
-
-  const fixture = TestBed.createComponent(DashboardComponent);
-  fixture.componentInstance.onAddTask('Buy groceries');
-
-  expect(mockTaskService.addTask).toHaveBeenCalledWith('Buy groceries');
-});
-```
-
-## Implementation Notes
-- Smart component: only manages state and service delegation
-- All visual logic is pushed to presentational components
-- Lazy loads via `loadComponent` for optimized bundle size
-- Uses `inject()` instead of constructor injection
-- Signal bindings are direct references to service signals (not copies)
-
-## Future Enhancements
-- Multi-page routing (settings, profile)
-- Keyboard shortcut handler at this level
-- Global search functionality
-- Toast notifications for task actions
-- Undo/redo system for task operations

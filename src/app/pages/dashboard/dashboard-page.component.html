@@ -4,8 +4,8 @@
     [navCounts]="navCounts()"
   />
 
-  <main class="flex-1 overflow-y-auto relative">
-    <div class="max-w-[1068px] mx-auto pt-[33px] px-[61px] pb-[61px] flex flex-col gap-[36px]">
+  <main class="flex-1 overflow-y-auto relative bg-bg-default h-full">
+    <div class="max-w-[1068px] mx-auto pt-[33px] px-[61px] pb-[256px] flex flex-col gap-[38px] min-h-full">
       <app-add-task-button (clicked)="onAddTaskPrompt()" />
 
       @if (todayTasks().length > 0) {
@@ -18,12 +18,14 @@
       }
 
       @if (completedTasks().length > 0) {
-        <app-task-list
-          title="Completed"
-          [tasks]="completedTasks()"
-          (taskToggle)="onToggleTask($event)"
-          (taskDelete)="onDeleteTaskPrompt($event)"
-        />
+        <div class="mt-auto">
+          <app-task-list
+            title="Completed"
+            [tasks]="completedTasks()"
+            (taskToggle)="onToggleTask($event)"
+            (taskDelete)="onDeleteTaskPrompt($event)"
+          />
+        </div>
       }
     </div>
 

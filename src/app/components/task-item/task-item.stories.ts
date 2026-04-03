@@ -20,7 +20,9 @@ const meta: Meta<TaskItem> = {
   title: 'Components/TaskItem',
   component: TaskItem,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    task: {  control: 'object' },
+  },
   args: { ...taskData }
 };
 

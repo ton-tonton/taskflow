@@ -7,7 +7,7 @@
   [class.border-green-500]="task().completed"
   [class.border-text-primary]="!task().completed"
 >
-  <div class="shrink-0 flex items-center pt-[2px]">
+  <div class="shrink-0 flex items-center">
     <app-checkbox
       [checked]="task().completed"
       [ariaLabel]="'Toggle task: ' + task().text"
@@ -16,12 +16,16 @@
   </div>
 
   <p
-    class="flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2"
-    [class.line-through]="task().completed"
+    class="flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2 flex items-center"
     [class.text-gray-400]="task().completed"
     [class.text-text-primary]="!task().completed"
   >
-    {{ task().text }}
+    <span class="relative">
+      {{ task().text }}
+      @if (task().completed) {
+        <span class="absolute top-1/2 left-0 w-full h-[1px] bg-gray-400 -translate-y-1/2"></span>
+      }
+    </span>
   </p>
 
   @if (!task().completed) {

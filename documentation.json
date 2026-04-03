@@ -752,7 +752,7 @@
         },
         {
             "name": "DashboardPageComponent",
-            "id": "component-DashboardPageComponent-3f68051d12feb08158846487fe01c02a409892563b46588cf3f3cc423325cb57a0772d4e30f6f7f57a60123baef55a1d6f3d1a01ad9d1211a6b332bce295155b",
+            "id": "component-DashboardPageComponent-5c4dc7a9fbe0d79e8859e06923cfeb54c01aae396ccd0fe24b2ab9d88261d801066ccc12e87e0ce3b5215befed225129854d51f07f9846b9666c71dfe4c497c2",
             "file": "src/app/pages/dashboard/dashboard-page.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -862,7 +862,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 54,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -879,7 +879,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -900,7 +900,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 42,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -917,7 +917,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -938,7 +938,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -955,41 +955,13 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 58,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "id",
                             "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "onNavigate",
-                    "args": [
-                        {
-                            "name": "view",
-                            "type": "ViewType",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 42,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "view",
-                            "type": "ViewType",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -1011,7 +983,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 58,
+                    "line": 54,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1056,12 +1028,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ChangeDetectionStrategy, inject, signal, computed } from '@angular/core';\nimport { TaskService } from '../../services/task.service';\nimport { ViewType, NavCounts, SideMenuComponent } from '../../components/side-menu/side-menu.component';\nimport { AddTaskButton } from '../../components/add-task-button/add-task-button.component';\nimport { TaskListComponent } from '../../components/task-list/task-list.component';\nimport { AddTaskModalComponent } from '../../components/add-task-modal/add-task-modal.component';\nimport { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-dashboard-page',\n  standalone: true,\n  imports: [\n    SideMenuComponent,\n    AddTaskButton,\n    TaskListComponent,\n    AddTaskModalComponent,\n    DeleteTaskModalComponent\n  ],\n  templateUrl: './dashboard-page.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class DashboardPageComponent {\n  private taskService = inject(TaskService);\n\n  activeView = signal<ViewType>('inbox');\n\n  todayTasks = this.taskService.todayTasks;\n  completedTasks = this.taskService.completedTasks;\n\n  navCounts = computed<NavCounts>(() => ({\n    inbox: this.taskService.inboxCount(),\n    today: this.taskService.todayCount(),\n    completed: this.taskService.completedCount()\n  }));\n\n  // Modals state\n  isAddModalOpen = signal(false);\n  isDeleteModalOpen = signal(false);\n  taskToDelete = signal<number | null>(null);\n\n  onNavigate(view: ViewType): void {\n    this.activeView.set(view);\n  }\n\n  onAddTaskPrompt(): void {\n    this.isAddModalOpen.set(true);\n  }\n\n  onAddTask(task: Task): void {\n    this.taskService.addTask(task.text);\n  }\n\n  onAddModalClosed(): void {\n    this.isAddModalOpen.set(false);\n  }\n\n  onToggleTask(id: number): void {\n    this.taskService.toggleTask(id);\n  }\n\n  onDeleteTaskPrompt(id: number): void {\n    this.taskToDelete.set(id);\n    this.isDeleteModalOpen.set(true);\n  }\n\n  onConfirmDelete(id: number): void {\n    this.taskService.deleteTask(id);\n  }\n\n  onDeleteModalClosed(): void {\n    this.isDeleteModalOpen.set(false);\n    this.taskToDelete.set(null);\n  }\n}\n",
+            "sourceCode": "import { Component, ChangeDetectionStrategy, inject, signal, computed } from '@angular/core';\nimport { TaskService } from '../../services/task.service';\nimport { ViewType, NavCounts, SideMenuComponent } from '../../components/side-menu/side-menu.component';\nimport { AddTaskButton } from '../../components/add-task-button/add-task-button.component';\nimport { TaskListComponent } from '../../components/task-list/task-list.component';\nimport { AddTaskModalComponent } from '../../components/add-task-modal/add-task-modal.component';\nimport { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-dashboard-page',\n  standalone: true,\n  imports: [\n    SideMenuComponent,\n    AddTaskButton,\n    TaskListComponent,\n    AddTaskModalComponent,\n    DeleteTaskModalComponent\n  ],\n  templateUrl: './dashboard-page.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class DashboardPageComponent {\n  private taskService = inject(TaskService);\n\n  activeView = signal<ViewType>('inbox');\n\n  todayTasks = this.taskService.todayTasks;\n  completedTasks = this.taskService.completedTasks;\n\n  navCounts = computed<NavCounts>(() => ({\n    inbox: this.taskService.inboxCount(),\n    today: this.taskService.todayCount(),\n    completed: this.taskService.completedCount()\n  }));\n\n  // Modals state\n  isAddModalOpen = signal(false);\n  isDeleteModalOpen = signal(false);\n  taskToDelete = signal<number | null>(null);\n\n  onAddTaskPrompt(): void {\n    this.isAddModalOpen.set(true);\n  }\n\n  onAddTask(task: Task): void {\n    this.taskService.addTask(task.text);\n  }\n\n  onAddModalClosed(): void {\n    this.isAddModalOpen.set(false);\n  }\n\n  onToggleTask(id: number): void {\n    this.taskService.toggleTask(id);\n  }\n\n  onDeleteTaskPrompt(id: number): void {\n    this.taskToDelete.set(id);\n    this.isDeleteModalOpen.set(true);\n  }\n\n  onConfirmDelete(id: number): void {\n    this.taskService.deleteTask(id);\n  }\n\n  onDeleteModalClosed(): void {\n    this.isDeleteModalOpen.set(false);\n    this.taskToDelete.set(null);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"flex h-screen w-screen bg-bg-default overflow-hidden\">\n  <app-side-menu\n    [activeView]=\"activeView()\"\n    [navCounts]=\"navCounts()\"\n    (navItemClick)=\"onNavigate($event)\"\n  />\n\n  <main class=\"flex-1 overflow-y-auto relative\">\n    <div class=\"max-w-[1068px] mx-auto pt-[33px] px-[61px] pb-[61px] flex flex-col gap-[36px]\">\n      <app-add-task-button (clicked)=\"onAddTaskPrompt()\" />\n\n      <!-- The spec says Today's Tasks and Completed Tasks -->\n      <app-task-list\n        title=\"Today's Tasks\"\n        [tasks]=\"todayTasks()\"\n        (taskToggle)=\"onToggleTask($event)\"\n        (taskDelete)=\"onDeleteTaskPrompt($event)\"\n      />\n\n      <app-task-list\n        title=\"Completed Tasks\"\n        [tasks]=\"completedTasks()\"\n        (taskToggle)=\"onToggleTask($event)\"\n        (taskDelete)=\"onDeleteTaskPrompt($event)\"\n      />\n    </div>\n\n    <!-- Modals -->\n    <app-add-task-modal\n      [isOpen]=\"isAddModalOpen()\"\n      (taskAdded)=\"onAddTask($event)\"\n      (closed)=\"onAddModalClosed()\"\n    />\n\n    @if (taskToDelete() !== null) {\n      <app-delete-task-modal\n        [isOpen]=\"isDeleteModalOpen()\"\n        [taskId]=\"taskToDelete()!\"\n        (confirmDelete)=\"onConfirmDelete($event)\"\n        (closed)=\"onDeleteModalClosed()\"\n      />\n    }\n  </main>\n</div>\n"
+            "templateData": "<div class=\"flex h-screen w-screen bg-bg-default overflow-hidden\">\n  <app-side-menu\n    [activeView]=\"activeView()\"\n    [navCounts]=\"navCounts()\"\n  />\n\n  <main class=\"flex-1 overflow-y-auto relative bg-bg-default h-full\">\n    <div class=\"max-w-[1068px] mx-auto pt-[33px] px-[61px] pb-[256px] flex flex-col gap-[38px] min-h-full\">\n      <app-add-task-button (clicked)=\"onAddTaskPrompt()\" />\n\n      @if (todayTasks().length > 0) {\n        <app-task-list\n          title=\"Tasks\"\n          [tasks]=\"todayTasks()\"\n          (taskToggle)=\"onToggleTask($event)\"\n          (taskDelete)=\"onDeleteTaskPrompt($event)\"\n        />\n      }\n\n      @if (completedTasks().length > 0) {\n        <div class=\"mt-auto\">\n          <app-task-list\n            title=\"Completed\"\n            [tasks]=\"completedTasks()\"\n            (taskToggle)=\"onToggleTask($event)\"\n            (taskDelete)=\"onDeleteTaskPrompt($event)\"\n          />\n        </div>\n      }\n    </div>\n\n    <!-- Modals -->\n    <app-add-task-modal\n      [isOpen]=\"isAddModalOpen()\"\n      (taskAdded)=\"onAddTask($event)\"\n      (closed)=\"onAddModalClosed()\"\n    />\n\n    @if (taskToDelete() !== null) {\n      <app-delete-task-modal\n        [isOpen]=\"isDeleteModalOpen()\"\n        [taskId]=\"taskToDelete()!\"\n        (confirmDelete)=\"onConfirmDelete($event)\"\n        (closed)=\"onDeleteModalClosed()\"\n      />\n    }\n  </main>\n</div>\n"
         },
         {
             "name": "DeleteTaskModalComponent",
@@ -1318,7 +1290,7 @@
         },
         {
             "name": "TaskItem",
-            "id": "component-TaskItem-a374a51dea9084bf3bfa3bdf644c62fbbb2e4072b4dbc5ecb62322a14df884b2e63fc8a1b50f6c8b82845a33f4c5f256f66347bfd3b81b0f4d9541851c09a9ce",
+            "id": "component-TaskItem-9f329d5649391efb98e26c019e5ecb2737d80fa853bb85f9928033fb8ac6f4167a96879bda07271742b7627de9fb3dc3728368715c6f06e083b3127baa3fc288",
             "file": "src/app/components/task-item/task-item.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1389,37 +1361,19 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
                     "name": "toggleTask",
-                    "args": [
-                        {
-                            "name": "checked",
-                            "type": "boolean",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
+                    "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
                     "line": 24,
                     "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "checked",
-                            "type": "boolean",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
+                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -1440,12 +1394,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faTrash } from '@fortawesome/free-solid-svg-icons';\nimport { CheckboxComponent } from '../checkbox/checkbox.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-task-item',\n  imports: [FaIconComponent, CheckboxComponent],\n  templateUrl: './task-item.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    class: 'block w-full',\n  },\n})\nexport class TaskItem {\n  task = input.required<Task>();\n\n  taskToggle = output<Task>();\n  taskDelete = output<Task>();\n\n  readonly faTrash = faTrash;\n\n  toggleTask(checked: boolean): void {\n    this.task().completed = checked;\n    this.taskToggle.emit(this.task());\n  }\n\n  deleteTask(): void {\n    this.taskDelete.emit(this.task());\n  }\n}\n\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faTrash } from '@fortawesome/free-solid-svg-icons';\nimport { CheckboxComponent } from '../checkbox/checkbox.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-task-item',\n  imports: [FaIconComponent, CheckboxComponent],\n  templateUrl: './task-item.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    class: 'block w-full',\n  },\n})\nexport class TaskItem {\n  task = input.required<Task>();\n\n  taskToggle = output<Task>();\n  taskDelete = output<Task>();\n\n  readonly faTrash = faTrash;\n\n  toggleTask(): void {\n    this.taskToggle.emit(this.task());\n  }\n\n  deleteTask(): void {\n    this.taskDelete.emit(this.task());\n  }\n}\n\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div\n  class=\"\n    bg-bg-default border border-solid content-stretch flex gap-sm items-start\n    leading-[1.5] p-md relative rounded-md w-full text-md\n    transition-colors duration-200\n  \"\n  [class.border-green-500]=\"task().completed\"\n  [class.border-text-primary]=\"!task().completed\"\n>\n  <div class=\"shrink-0 flex items-center pt-[2px]\">\n    <app-checkbox\n      [checked]=\"task().completed\"\n      [ariaLabel]=\"'Toggle task: ' + task().text\"\n      (checkedChange)=\"toggleTask($event)\"\n    />\n  </div>\n\n  <p\n    class=\"flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2\"\n    [class.line-through]=\"task().completed\"\n    [class.text-gray-400]=\"task().completed\"\n    [class.text-text-primary]=\"!task().completed\"\n  >\n    {{ task().text }}\n  </p>\n\n  @if (!task().completed) {\n    <button\n      type=\"button\"\n      class=\"\n        shrink-0 flex items-center justify-center text-red-500 cursor-pointer\n        hover:text-red-700 focus-visible:outline focus-visible:outline-2\n        focus-visible:outline-offset-2 focus-visible:outline-error\n        rounded-sm p-1 -m-1 transition-colors ml-auto\n      \"\n      [attr.aria-label]=\"'Delete task: ' + task().text\"\n      (click)=\"deleteTask()\"\n    >\n      <fa-icon [icon]=\"faTrash\" aria-hidden=\"true\" />\n    </button>\n  }\n</div>\n"
+            "templateData": "<div\n  class=\"\n    bg-bg-default border border-solid content-stretch flex gap-sm items-start\n    leading-[1.5] p-md relative rounded-md w-full text-md\n    transition-colors duration-200\n  \"\n  [class.border-green-500]=\"task().completed\"\n  [class.border-text-primary]=\"!task().completed\"\n>\n  <div class=\"shrink-0 flex items-center pt-[2px]\">\n    <app-checkbox\n      [checked]=\"task().completed\"\n      [ariaLabel]=\"'Toggle task: ' + task().text\"\n      (checkedChange)=\"toggleTask()\"\n    />\n  </div>\n\n  <p\n    class=\"flex-1 font-base min-h-px min-w-px relative transition-colors duration-200 break-words ml-2\"\n    [class.line-through]=\"task().completed\"\n    [class.text-gray-400]=\"task().completed\"\n    [class.text-text-primary]=\"!task().completed\"\n  >\n    {{ task().text }}\n  </p>\n\n  @if (!task().completed) {\n    <button\n      type=\"button\"\n      class=\"\n        shrink-0 flex items-center justify-center text-red-500 cursor-pointer\n        hover:text-red-700 focus-visible:outline focus-visible:outline-2\n        focus-visible:outline-offset-2 focus-visible:outline-error\n        rounded-sm p-1 -m-1 transition-colors ml-auto\n      \"\n      [attr.aria-label]=\"'Delete task: ' + task().text\"\n      (click)=\"deleteTask()\"\n    >\n      <fa-icon [icon]=\"faTrash\" aria-hidden=\"true\" />\n    </button>\n  }\n</div>\n"
         },
         {
             "name": "TaskListComponent",
@@ -1844,7 +1798,7 @@
                 "linktype": "component",
                 "name": "DashboardPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/17",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {

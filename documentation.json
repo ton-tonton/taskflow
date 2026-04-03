@@ -69,6 +69,259 @@
     "directives": [],
     "components": [
         {
+            "name": "AddTaskButton",
+            "id": "component-AddTaskButton-37302e65acbf79eb47dc834d764f3e69e362baa49ac37c1a82d5a638908a60030e2022795426cd25106e2ac153b0b4898b37fe9faba721a5ebd046ecb8e6d985",
+            "file": "src/app/components/add-task-button/add-task-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-add-task-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./add-task-button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "clicked",
+                    "defaultValue": "output<MouseEvent>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "faPlus",
+                    "defaultValue": "faPlus",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "text",
+                    "defaultValue": "input<string>('Add new task')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "FaIconComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faPlus } from '@fortawesome/free-solid-svg-icons';\n\n@Component({\n  selector: 'app-add-task-button',\n  imports: [FaIconComponent],\n  templateUrl: './add-task-button.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class AddTaskButton {\n  text = input<string>('Add new task');\n  clicked = output<MouseEvent>();\n\n  faPlus = faPlus;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button\n  type=\"button\"\n  (click)=\"clicked.emit($event)\"\n  class=\"\n    flex items-center w-full content-stretch\n    gap-sm px-md py-sm\n    bg-bg-default border border-dashed border-balticsea-100 rounded-md\n    text-balticsea-200 text-md font-base leading-[1.5]\n    transition-colors hover:bg-springwood-600 hover:border-balticsea-200\n    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary\n  \"\n>\n  <fa-icon [icon]=\"faPlus\" aria-hidden=\"true\" class=\"shrink-0\" />\n  <span class=\"flex-1 text-left leading-[1.5] min-w-0 truncate\">\n    {{ text() }}\n  </span>\n</button>\n"
+        },
+        {
+            "name": "AddTaskModalComponent",
+            "id": "component-AddTaskModalComponent-71e42ec45c86fa4b09f53487651adc19a82fdc6fe0ddcc1ce94db8ba6a86ce0d62861a47aa924629cbcb26afecf8ab66492bfb4a2cc54d563c013296138febca",
+            "file": "src/app/components/add-task-modal/add-task-modal.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-add-task-modal",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./add-task-modal.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "closed",
+                    "defaultValue": "output<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "dialogRef",
+                    "defaultValue": "viewChild<ElementRef<HTMLDialogElement>>('dialogRef')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "faXmark",
+                    "defaultValue": "faXmark",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "inputRef",
+                    "defaultValue": "viewChild<ElementRef<HTMLTextAreaElement>>('inputRef')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "isOpen",
+                    "defaultValue": "input<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "taskAdded",
+                    "defaultValue": "output<Task>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "taskName",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onAddTask",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 63,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onBackdropClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onClose",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "FaIconComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\n  Component,\n  ChangeDetectionStrategy,\n  input,\n  output,\n  effect,\n  ElementRef,\n  viewChild,\n} from '@angular/core';\nimport { FormsModule } from '@angular/forms';\nimport { FaIconComponent } from '@fortawesome/angular-fontawesome';\nimport { faXmark } from '@fortawesome/free-solid-svg-icons';\nimport { ButtonComponent } from '../button/button.component';\nimport { Task } from '../../models/task.model';\n\n@Component({\n  selector: 'app-add-task-modal',\n  standalone: true,\n  imports: [ButtonComponent, FaIconComponent, FormsModule],\n  templateUrl: './add-task-modal.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class AddTaskModalComponent {\n  isOpen = input<boolean>(false);\n  taskAdded = output<Task>();\n  closed = output<void>();\n\n  dialogRef = viewChild<ElementRef<HTMLDialogElement>>('dialogRef');\n  inputRef = viewChild<ElementRef<HTMLTextAreaElement>>('inputRef');\n\n  faXmark = faXmark;\n  taskName = '';\n\n  constructor() {\n    effect(() => {\n      const dialog = this.dialogRef()?.nativeElement;\n      if (dialog) {\n        if (this.isOpen()) {\n          this.taskName = ''; // Reset input when modal opens\n          dialog.showModal();\n          setTimeout(() => {\n            this.inputRef()?.nativeElement.focus();\n          }, 50); // slight delay to ensure dialog has rendered\n        } else {\n          dialog.close();\n        }\n      }\n    });\n  }\n\n  onClose() {\n    this.closed.emit();\n  }\n\n  onBackdropClick(event: MouseEvent) {\n    const dialog = this.dialogRef()?.nativeElement;\n    // If the click is precisely on the dialog element it's a backdrop click.\n    if (dialog && event.target === dialog) {\n      this.onClose();\n    }\n  }\n\n  onAddTask() {\n    if (this.taskName.trim().length > 0) {\n      const newTask: Task = {\n        id: Date.now(),\n        text: this.taskName.trim(),\n        completed: false,\n        createdAt: new Date(),\n      };\n      this.taskAdded.emit(newTask);\n      this.taskName = '';\n      this.onClose();\n    }\n  }\n}\n\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 32
+            },
+            "extends": [],
+            "templateData": "<dialog\n  #dialogRef\n  (cancel)=\"onClose()\"\n  (click)=\"onBackdropClick($event)\"\n  class=\"bg-bg-default rounded-md backdrop:bg-black/50 open:flex flex-col border-none p-xl w-[454px] max-w-full shadow-lg m-auto\"\n>\n  <div class=\"flex justify-between items-start w-full relative\">\n    <h2 class=\"text-xl font-base text-text-primary mt-2\">Add new task</h2>\n    <div class=\"absolute -top-3 -right-3\">\n      <button\n        (click)=\"onClose()\"\n        aria-label=\"Close modal\"\n        class=\"text-balticsea-200 hover:text-text-primary transition-colors cursor-pointer p-xs\"\n      >\n        <fa-icon [icon]=\"faXmark\" aria-hidden=\"true\"></fa-icon>\n      </button>\n    </div>\n  </div>\n\n  <div class=\"w-full mt-xl mb-xl\">\n    <label for=\"task-name\" class=\"sr-only\">Task name</label>\n    <textarea\n      #inputRef\n      id=\"task-name\"\n      placeholder=\"Task name\"\n      [(ngModel)]=\"taskName\"\n      (keydown.enter)=\"$event.preventDefault(); onAddTask()\"\n      class=\"border border-balticsea-100 rounded-md px-md py-sm text-md font-base w-full text-text-primary bg-bg-default focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary h-[190px] resize-none\"\n    ></textarea>\n  </div>\n\n  <div class=\"flex justify-end gap-md w-full mt-auto\">\n    <!-- Use disabled directly from app-button -->\n    <app-button variant=\"primary\" (clicked)=\"onAddTask()\" [disabled]=\"!taskName.trim()\">Add task</app-button>\n    <app-button variant=\"outline\" (clicked)=\"onClose()\">Cancel</app-button>\n  </div>\n</dialog>\n"
+        },
+        {
             "name": "App",
             "id": "component-App-b813bb1b7453432c1c0023714ed0702cceb36240890d05ba6c43f51f7d9d1d26d53cd481eba39a6b7a65cb373537237da7c14bd1bb9055a4823139ada9455d0b",
             "file": "src/app/app.ts",
@@ -540,6 +793,24 @@
                 "name": "App",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/add-task-button/add-task-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AddTaskButton",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/add-task-modal/add-task-modal.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AddTaskModalComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {

@@ -1,0 +1,37 @@
+<dialog
+  #dialogRef
+  (cancel)="onClose()"
+  (click)="onBackdropClick($event)"
+  class="bg-bg-default rounded-md backdrop:bg-black/50 open:flex flex-col border-none p-xl w-[454px] max-w-full shadow-lg m-auto"
+>
+  <div class="flex justify-between items-start w-full relative">
+    <h2 class="text-xl font-base text-text-primary mt-2">Add new task</h2>
+    <div class="absolute -top-3 -right-3">
+      <button
+        (click)="onClose()"
+        aria-label="Close modal"
+        class="text-balticsea-200 hover:text-text-primary transition-colors cursor-pointer p-xs"
+      >
+        <fa-icon [icon]="faXmark" aria-hidden="true"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="w-full mt-xl mb-xl">
+    <label for="task-name" class="sr-only">Task name</label>
+    <textarea
+      #inputRef
+      id="task-name"
+      placeholder="Task name"
+      [(ngModel)]="taskName"
+      (keydown.enter)="$event.preventDefault(); onAddTask()"
+      class="border border-balticsea-100 rounded-md px-md py-sm text-md font-base w-full text-text-primary bg-bg-default focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary h-[190px] resize-none"
+    ></textarea>
+  </div>
+
+  <div class="flex justify-end gap-md w-full mt-auto">
+    <!-- Use disabled directly from app-button -->
+    <app-button variant="primary" (clicked)="onAddTask()" [disabled]="!taskName.trim()">Add task</app-button>
+    <app-button variant="outline" (clicked)="onClose()">Cancel</app-button>
+  </div>
+</dialog>

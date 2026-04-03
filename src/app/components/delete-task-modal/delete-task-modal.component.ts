@@ -7,22 +7,22 @@ import {
   ElementRef,
   viewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ButtonComponent } from '../button/button.component';
-import { Task } from '../../models/task.model';
 
 @Component({
-  selector: 'app-add-task-modal',
+  selector: 'app-delete-task-modal',
   standalone: true,
-  imports: [ButtonComponent, FaIconComponent, FormsModule],
-  templateUrl: './add-task-modal.component.html',
+  imports: [ButtonComponent, FaIconComponent],
+  templateUrl: './delete-task-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddTaskModalComponent {
+export class DeleteTaskModalComponent {
   isOpen = input<boolean>(false);
-  taskAdded = output<Task>();
+  taskId = input.required<number>();
+
+  confirmDelete = output<number>();
   closed = output<void>();
 
   /**
@@ -33,23 +33,27 @@ export class AddTaskModalComponent {
 
   /**
    * @ignore
-   * References to the input elements for controlling focus.
+   * References to the cancel button elements for controlling focus wrapper.
    */
-  inputRef = viewChild<ElementRef<HTMLTextAreaElement>>('inputRef');
+  cancelBtnRef = viewChild('cancelBtnRef', { read: ElementRef });
 
   readonly faXmark = faXmark;
-  taskName = '';
 
   constructor() {
     effect(() => {
       const dialog = this.dialogRef()?.nativeElement;
       if (dialog) {
         if (this.isOpen()) {
-          this.taskName = ''; // Reset input when modal opens
           dialog.showModal();
           setTimeout(() => {
-            this.inputRef()?.nativeElement.focus();
-          }, 50); // slight delay to ensure dialog has rendered
+            const cancelWrapper = this.cancelBtnRef()?.nativeElement;
+            const button = cancelWrapper?.querySelector('button');
+            if (button) {
+              button.focus();
+            } else {
+              cancelWrapper?.focus();
+            }
+          }, 50);
         } else {
           dialog.close();
         }
@@ -69,18 +73,8 @@ export class AddTaskModalComponent {
     }
   }
 
-  onAddTask() {
-    if (this.taskName.trim().length > 0) {
-      const newTask: Task = {
-        id: Date.now(),
-        text: this.taskName.trim(),
-        completed: false,
-        createdAt: new Date(),
-      };
-      this.taskAdded.emit(newTask);
-      this.taskName = '';
-      this.onClose();
-    }
+  onConfirmDelete() {
+    this.confirmDelete.emit(this.taskId());
+    this.onClose();
   }
 }
-

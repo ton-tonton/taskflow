@@ -1,0 +1,33 @@
+<dialog
+  #dialogRef
+  (cancel)="onClose()"
+  (click)="onBackdropClick($event)"
+  class="
+    bg-bg-default rounded-md backdrop:bg-black/50 open:flex flex-col border-none p-xl
+    w-[500px] max-w-full shadow-lg m-auto
+  "
+>
+  <div class="flex justify-between items-start w-full relative">
+    <h2 class="text-xl font-base text-text-primary mt-2">Confirm deletion</h2>
+    <div class="absolute -top-3 -right-3">
+      <button
+        (click)="onClose()"
+        aria-label="Close modal"
+        class="text-balticsea-200 hover:text-text-primary transition-colors cursor-pointer p-xs"
+      >
+        <fa-icon [icon]="faXmark" aria-hidden="true"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="w-full mt-xl mb-xl">
+    <p class="text-md text-balticsea-100 font-base">
+      The task will be removed permanently. This cannot be reversed.
+    </p>
+  </div>
+
+  <div class="flex justify-end gap-md w-full mt-auto">
+    <app-button variant="error" (clicked)="onConfirmDelete()">Delete</app-button>
+    <app-button #cancelBtnRef variant="outline" (clicked)="onClose()">Cancel</app-button>
+  </div>
+</dialog>

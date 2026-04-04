@@ -118,6 +118,7 @@
 
   /* Background */
   --color-bg-default: var(--color-springwood-500);
+  --color-bg-task: var(--color-yellow-400);
 
   /* Disabled / muted states */
   --color-primary-muted: var(--color-balticsea-100);
@@ -137,6 +138,11 @@
   --color-btn-primary-text-disabled: var(--color-text-disabled);
 
   --color-btn-primary-border: var(--color-primary);
+
+  /* ========================================
+     COLORS — Component: Task Item
+     ======================================== */
+  --color-task-item-bg: var(--color-bg-task);
 
   /* ========================================
      TYPOGRAPHY
